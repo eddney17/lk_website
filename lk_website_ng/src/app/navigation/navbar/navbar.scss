@@ -1,0 +1,70 @@
+$purple: #ba76f2;
+
+.navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+	align-items: center;
+	padding: 0.5rem 3rem;
+	z-index: 1000;
+    height: 4.5rem;
+}
+
+.navbar-brand{
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    height: 50px;
+    margin-right: 1rem;
+}
+
+.navbar-title {
+    flex: 1;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #333;
+    text-decoration: none;
+}
+
+.navbar-flex {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navbar-brand a {
+    padding-top: 1.5rem;
+	font-size: 1.5rem;
+    font-weight: 300;
+	color: #333;
+	text-decoration: none;    
+}
+
+.navbar-links {
+        display: inline-block;         
+        list-style-type: none;
+}
+
+.navbar-links li {
+    margin: 0 1rem;
+    padding: 0;
+    display: inline-block;
+}   
+
+.navbar-links li a {
+	color: #333;
+	text-decoration: none;
+	font-size: 1rem;
+	transition: color 0.2s;
+    
+}
+
+.navbar-links li a:hover {
+	color: $purple;
+    font-weight: 400;
+}

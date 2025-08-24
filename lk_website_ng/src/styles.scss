@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+$darkgrey: rgb(59, 58, 58);
+
+* {
+    box-sizing: border-box;
+  }
+
+  html, body{
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;  
+    margin: 0;
+    padding: 0;
+    background-color: #F1F1F1 !important;
+}
+
+.section-wrapper {
+  padding: 2rem 5rem 5rem 4rem;
+}
+
+
+.section {
+    padding: 3rem 0 0 0;
+    justify-items: center;
+}
+
+.section-header {
+    color: $darkgrey;
+}
+
+.text-wrapper {
+  padding: 0 4rem 0 4rem;
+}
+
+.text-wrapper p {
+  text-indent: 1rem;
+  text-align: justify;
+}
+
+.italic {
+  font-style: italic;
+}

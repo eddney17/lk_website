@@ -1,0 +1,7 @@
+<div class="carousel">
+  <button class="carousel-btn prev" (click)="prev()">&#10094;</button>
+  <div class="carousel-track">
+    <img *ngFor="let img of images; let i = index" [src]="img" [class.active]="i === current" />
+  </div>
+  <button class="carousel-btn next" (click)="next()">&#10095;</button>
+</div>

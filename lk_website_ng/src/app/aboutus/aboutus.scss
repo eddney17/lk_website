@@ -1,0 +1,38 @@
+.aboutus {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 2rem 4rem 2rem 4rem;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.aboutus h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.aboutus form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.aboutus input,
+.aboutus textarea {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+.aboutus button {
+    background: transparent;
+    border: 2px solid #333;
+    color: #333;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+.aboutus button:hover {
+    border-color: #007bff;
+    color: #007bff;
+}

@@ -1,0 +1,134 @@
+$darkgrey: rgb(59, 58, 58);
+$purple: #ba76f2;
+
+
+.product-item img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.product-item h3,
+.product-item p {
+    text-align: center;
+}
+
+.banner-image {
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 7.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.banner-overlay h1 {
+    font-size: 4rem;
+    margin: 0 0 0.5rem 0;
+    color: #333;
+}
+
+.banner-overlay p {
+    font-weight: 300;
+    font-size: 1.3rem;
+    margin: 0 0 2rem 0;
+    color: #555;
+}
+
+.banner-image img {
+    height: 100vh;
+    width: 100%;  
+    object-fit: cover;
+    align-items: center;
+    display: block;
+}
+
+.customize-button {
+    background: transparent;
+    border: 2px solid #333;
+    color: #333;
+    padding: 0.75rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none;
+}
+
+.customize-button:hover {
+    border-color: $purple;
+    color: $purple;
+    font-weight: 400;
+}
+
+.hot-picks {
+    justify-items: center;
+}
+
+.products {
+    display: flex;
+}
+
+.product-item {
+    max-width: 20rem;
+    flex:1;
+    margin: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-item img{
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 10%;
+    align-items: center;
+}
+
+.product-item h3{
+    text-align: center;
+}
+.product-item p {
+    text-align: justify;
+}
+.client-testimonials {
+    padding: 3rem 0 0 0;
+    justify-items: center;
+}
+
+.testimonial {
+    display: flex;
+}
+
+.testimonial-image{
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonial-text {
+    flex: 1;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.testimonial-image img {
+    height: 20rem;
+    object-fit: cover;
+}
+
+.section {
+    padding: 3rem 0 0 0;
+    justify-items: center;
+}
+
+.section-header {
+    color: $darkgrey;
+}
