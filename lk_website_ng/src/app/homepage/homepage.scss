@@ -1,3 +1,10 @@
+$fa-star-color: yellow;
+
+.stars {
+    color: $fa-star-color;
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+}
 $darkgrey: rgb(59, 58, 58);
 $purple: #ba76f2;
 
@@ -104,6 +111,7 @@ $purple: #ba76f2;
 
 .testimonial {
     display: flex;
+    padding: 0 10rem 0 10rem;
 }
 
 .testimonial-image{
@@ -117,11 +125,19 @@ $purple: #ba76f2;
     flex: 1;
     padding: 1rem;
     font-size: 1.5rem;
+    font-weight: 200;
+    
+}
+
+.testimonial-text h2 {
+    color: $darkgrey;
+    margin: 0 !important;
 }
 
 .testimonial-image img {
     height: 20rem;
     object-fit: cover;
+    border-radius: 10%;
 }
 
 .section {
