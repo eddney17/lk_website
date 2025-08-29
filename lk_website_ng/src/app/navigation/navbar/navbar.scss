@@ -1,3 +1,6 @@
+$mobile-breakpoint: 600px;
+
+
 $purple: #ba76f2;
 
 .navbar {
@@ -67,4 +70,44 @@ $purple: #ba76f2;
 .navbar-links li a:hover {
 	color: $purple;
     font-weight: 400;
+}
+
+@media (max-width: $mobile-breakpoint) {
+
+    .navbar {
+        max-width: 100%;
+        height: auto;
+    }
+    .navbar-flex {
+        flex-direction: column;
+        max-width: 100%;
+    }
+    // .navbar,
+    // .navbar-flex,
+    // .navbar-brand,
+    // .navbar-links,
+    // .navbar-links li,
+    // .navbar-logo,
+    // .navbar-title {
+    //     box-sizing: border-box;
+    // }
+    // .navbar {
+    //     padding: 0.5rem 0.5rem;
+    //     height: auto;
+    // }
+    // .navbar-logo {
+    //     height: 40px;
+    //     margin-right: 0.5rem;
+    // }
+    // .navbar-title {
+    //     font-size: 1.1rem;
+    //     padding-top: 0.5rem;
+    // }
+    // .navbar-links {
+    //     font-size: 1rem;
+    //     padding: 0.5rem 0;
+    // }
+    // .navbar-links li {
+    //     margin: 0.5rem 0;
+    // }
 }

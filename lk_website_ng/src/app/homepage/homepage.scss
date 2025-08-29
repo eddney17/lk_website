@@ -1,10 +1,21 @@
 $fa-star-color: yellow;
 
-.stars {
-    color: $fa-star-color;
-    font-size: 1.5rem;
-    letter-spacing: 0.1rem;
+$mobile-breakpoint: 600px;
+
+@media (max-width: $mobile-breakpoint) {
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .testimonial {
+        padding: 0 0 0 0 !important;
+    }
 }
+
+
 $darkgrey: rgb(59, 58, 58);
 $purple: #ba76f2;
 
@@ -111,6 +122,7 @@ $purple: #ba76f2;
 
 .testimonial {
     display: flex;
+    flex-wrap: wrap;
     padding: 0 10rem 0 10rem;
 }
 
