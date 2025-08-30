@@ -2,18 +2,6 @@ $fa-star-color: yellow;
 
 $mobile-breakpoint: 600px;
 
-@media (max-width: $mobile-breakpoint) {
-    .products {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        flex-direction: column;
-    }
-    
-    .testimonial {
-        padding: 0 0 0 0 !important;
-    }
-}
 
 
 $darkgrey: rgb(59, 58, 58);
@@ -137,8 +125,7 @@ $purple: #ba76f2;
     flex: 1;
     padding: 1rem;
     font-size: 1.5rem;
-    font-weight: 200;
-    
+    font-weight: 200;    
 }
 
 .testimonial-text h2 {
@@ -159,4 +146,47 @@ $purple: #ba76f2;
 
 .section-header {
     color: $darkgrey;
+}
+
+@media (max-width: $mobile-breakpoint) {
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .testimonial {
+        padding: 0 0 0 0 !important;
+    }
+
+    .testimonial-text {
+        flex: 1;
+        padding: 0.4rem;
+        font-size: 1rem;
+        font-weight: 200;    
+        text-align: center;
+    }
+
+    .banner-overlay h1 {
+        // margin-top: 2rem;
+        font-size: 2rem;
+        margin: 2rem 0 0.5rem 0;
+        color: #333;
+    }
+
+    .banner-overlay p {
+        font-weight: 300;
+        font-size: 1rem;
+        margin: 0 0 2rem 0;
+        color: #555;
+    }
+
+    .banner-image img {
+        height: 35rem;
+   
+    }
+
+
+
 }

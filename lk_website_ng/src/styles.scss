@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 $darkgrey: rgb(59, 58, 58);
+$mobile-breakpoint: 600px;
 
 * {
     box-sizing: border-box;
@@ -15,7 +16,7 @@ $darkgrey: rgb(59, 58, 58);
 }
 
 .section-wrapper {
-  padding: 2rem 5rem 5rem 4rem;
+  padding: 2rem 5rem 5rem 2rem;
 }
 
 
@@ -39,4 +40,27 @@ $darkgrey: rgb(59, 58, 58);
 
 .italic {
   font-style: italic;
+}
+
+.router-wrapper {
+  position:relative;
+  top:0;
+  padding: 4.5rem 0 0 0;
+  width: 100%;
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .section-wrapper {
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+
+  
+  .router-wrapper {
+    position:relative;
+    top:0;
+    padding: 8rem 0 0 0;
+    width: 100%;
+  }
+
+
 }

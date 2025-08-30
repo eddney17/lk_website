@@ -82,6 +82,12 @@ $purple: #ba76f2;
         flex-direction: column;
         max-width: 100%;
     }
+
+    .navbar-links {
+            display: inline-block;         
+            list-style-type: none;
+            padding-inline-start: 0;
+    }
     // .navbar,
     // .navbar-flex,
     // .navbar-brand,
