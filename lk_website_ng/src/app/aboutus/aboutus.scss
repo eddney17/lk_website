@@ -1,10 +1,12 @@
+$mobile-breakpoint: 600px;
+
 .aboutus {
-    max-width: 1000px;
-    margin: 3rem auto;
-    padding: 2rem 4rem 2rem 4rem;
-    background: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    // max-width: 1000px;
+    margin: 0 18rem 0 18rem;
+    padding: 0 0 1rem 0;
+    background: #ffffff;
+    // border-radius: 1rem;
+    // box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 .aboutus h1 {
     text-align: center;
@@ -35,4 +37,11 @@
 .aboutus button:hover {
     border-color: #007bff;
     color: #007bff;
+}
+
+
+@media (max-width: $mobile-breakpoint) {
+    .aboutus {
+        margin: 0 1rem 0 1rem;
+    }
 }

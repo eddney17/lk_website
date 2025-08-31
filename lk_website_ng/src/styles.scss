@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-
 $darkgrey: rgb(59, 58, 58);
 $mobile-breakpoint: 600px;
+
+$white: rgb(239, 237, 237, 1);
 
 * {
     box-sizing: border-box;
@@ -49,6 +50,29 @@ $mobile-breakpoint: 600px;
   width: 100%;
 }
 
+.header-wrapper {
+  position: relative;
+  height: 13rem;
+  width: 100%;
+  background: linear-gradient(rgba(130, 120, 141, 0.8), rgba(140, 139, 141, 0.44)), url('/lk_banner_new.png') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // background-color: rgba(186, 118, 242, 0.5); // purple with 50% opacity
+}
+
+.white {
+  color: $white !important;
+}
+
+// .overlay {
+//   position: absolute;
+//   top: 0; left: 0; right: 0; bottom: 0;
+//   background-color: rgba(186, 118, 242, 0.5); // purple with 50% opacity
+//   z-index: 1;
+// }
+
 @media (max-width: $mobile-breakpoint) {
   .section-wrapper {
     padding: 1rem 0.5rem 1rem 0.5rem;
@@ -61,6 +85,27 @@ $mobile-breakpoint: 600px;
     padding: 8rem 0 0 0;
     width: 100%;
   }
+
+  .header-wrapper {
+  position: relative;
+  height: 8rem;
+  width: 100%;
+  background: linear-gradient(rgba(130, 120, 141, 0.8), rgba(140, 139, 141, 0.44)), url('/lk_banner_new.png') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // background-color: rgba(186, 118, 242, 0.5); // purple with 50% opacity
+}
+
+.text-wrapper {
+  padding: 0 1rem 0 1rem;
+}
+
+.text-wrapper p {
+  text-indent: 1rem;
+  text-align: justify;
+}
 
 
 }
