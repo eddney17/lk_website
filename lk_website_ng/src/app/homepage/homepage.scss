@@ -1,11 +1,14 @@
 $fa-star-color: yellow;
 
 $mobile-breakpoint: 600px;
-
-
-
+$lk_brown:rgb(91, 35, 15);
 $darkgrey: rgb(59, 58, 58);
+$lightgrey:rgb(95, 94, 94);
 $purple: #ba76f2;
+
+.f-color-lkbrown{
+    color: $lk_brown !important;
+}
 
 
 .product-item img {
@@ -19,6 +22,7 @@ $purple: #ba76f2;
 }
 
 .banner-image {
+    text-align: center;
     align-items: center;
     justify-content: center;
 }
@@ -58,8 +62,8 @@ $purple: #ba76f2;
 
 .customize-button {
     background: transparent;
-    border: 2px solid #333;
-    color: #333;
+    border: 2px solid $lightgrey;
+    color: $lightgrey;
     padding: 0.75rem 2rem;
     font-size: 1.2rem;
     border-radius: 2rem;
@@ -69,8 +73,8 @@ $purple: #ba76f2;
 }
 
 .customize-button:hover {
-    border-color: $purple;
-    color: $purple;
+    border-color: $lk_brown;
+    color: $lk_brown;
     font-weight: 400;
 }
 
@@ -141,16 +145,13 @@ $purple: #ba76f2;
     justify-items: center;
 }
 
-.section-header {
-    color: $darkgrey;
-}
-
 @media (max-width: $mobile-breakpoint) {
     .products {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         flex-direction: column;
+        text-align: center;
     }
     
     .testimonial {

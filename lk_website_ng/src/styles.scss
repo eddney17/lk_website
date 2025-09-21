@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 $darkgrey: rgb(59, 58, 58);
+$lk_brown:rgb(91, 35, 15);
 $mobile-breakpoint: 600px;
 
 $white: rgb(239, 237, 237, 1);
@@ -9,17 +10,52 @@ $white: rgb(239, 237, 237, 1);
   }
 
   html, body{
-    font-family: "Poppins", sans-serif;
+    font-family: "Roboto Slab", sans-serif;
     font-weight: 200;  
     margin: 0;
     padding: 0;
     background-color: #F1F1F1 !important;
 }
 
+.font-courgette {
+  font-family: 'Courgette', cursive !important;
+}
+
 .section-wrapper {
   padding: 2rem 5rem 5rem 2rem;
 }
 
+.fw-200 {
+  font-weight: 200 !important;
+}
+
+.fw-300 {
+  font-weight: 300 !important;
+}
+
+.fw-400 {
+  font-weight: 400 !important;
+}
+
+.fw-500 {
+  font-weight: 500 !important;
+}
+
+.fw-600 {
+  font-weight: 600 !important;
+}
+
+.fw-700 {
+  font-weight: 700 !important;
+}
+
+.fw-800 {
+  font-weight: 800 !important;
+}
+
+.fw-900 {
+  font-weight: 900 !important;
+}
 
 .section {
     padding: 3rem 0 0 0;
@@ -28,7 +64,8 @@ $white: rgb(239, 237, 237, 1);
 }
 
 .section-header {
-    color: $darkgrey;
+    color: $lk_brown;
+    font-size: 4.2rem;
 }
 
 .text-wrapper {
@@ -62,6 +99,11 @@ $white: rgb(239, 237, 237, 1);
   justify-content: center;
   // background-color: rgba(186, 118, 242, 0.5); // purple with 50% opacity
 }
+
+.f-color-lkbrown{
+    color: $lk_brown !important;
+}
+
 
 .white {
   color: $white !important;
@@ -107,6 +149,7 @@ $white: rgb(239, 237, 237, 1);
   text-indent: 1rem;
   text-align: justify;
 }
+
 
 
 }

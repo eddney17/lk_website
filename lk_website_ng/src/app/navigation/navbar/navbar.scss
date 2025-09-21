@@ -1,6 +1,5 @@
 $mobile-breakpoint: 600px;
-
-
+$lk_brown:rgb(91, 35, 15);
 $purple: #ba76f2;
 
 .navbar {
@@ -29,7 +28,7 @@ $purple: #ba76f2;
 .navbar-title {
     flex: 1;
     font-size: 1.5rem;
-    font-weight: 300;
+    // font-weight: 300;
     color: #333;
     text-decoration: none;
 }
@@ -68,8 +67,8 @@ $purple: #ba76f2;
 }
 
 .navbar-links li a:hover {
-	color: $purple;
-    font-weight: 400;
+	color: $lk_brown;
+    font-weight: 500;
 }
 
 @media (max-width: $mobile-breakpoint) {
