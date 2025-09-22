@@ -1,3 +1,6 @@
+$darkgrey: rgb(59, 58, 58);
+$lk_brown:rgb(91, 35, 15);
+
 .contactus {
     max-width: 700px;
     margin: 3rem auto;
@@ -24,15 +27,23 @@
 }
 .contactus button {
     background: transparent;
-    border: 2px solid #333;
-    color: #333;
+    border: 2px solid $darkgrey;
+    color: $darkgrey;
     padding: 0.75rem 2rem;
     font-size: 1.1rem;
     border-radius: 2rem;
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
+    // transition: border-color 0.2s, color 0.2s;
+    width: 20rem;
 }
 .contactus button:hover {
-    border-color: #007bff;
-    color: #007bff;
+    background-color: $lk_brown;
+    border-color: white;
+    color: white;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }

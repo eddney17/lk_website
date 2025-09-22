@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './carousel.html',
   styleUrl: './carousel.scss'
 })
-export class Carousel {
+export class Carousel implements OnInit, OnDestroy {
   images = [
     '/lk_img_1.jpg',
     '/lk_img_2.jpg',
@@ -17,6 +17,19 @@ export class Carousel {
     '/lk_img_5.jpg',
   ];
   current = 0;
+  private intervalId: any;
+
+  ngOnInit() {
+    this.intervalId = setInterval(() => {
+      this.next();
+    }, 3000); // Change image every 3 seconds
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
 
   prev() {
     this.current = (this.current - 1 + this.images.length) % this.images.length;

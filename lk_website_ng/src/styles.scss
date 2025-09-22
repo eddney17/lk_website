@@ -65,7 +65,7 @@ $white: rgb(239, 237, 237, 1);
 
 .section-header {
     color: $lk_brown;
-    font-size: 4.2rem;
+    font-size: 4rem;
 }
 
 .text-wrapper {
@@ -90,10 +90,11 @@ $white: rgb(239, 237, 237, 1);
 
 .header-wrapper {
   position: relative;
-  height: 13rem;
+  height: 16rem;
   width: 100%;
-  background: linear-gradient(rgba(130, 120, 141, 0.8), rgba(140, 139, 141, 0.44)), url('/lk_banner_new.png') no-repeat center center;
+  background: url('/lk_banner2.png') no-repeat center center;
   background-size: cover;
+  background-color: $lk_brown;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,6 +117,15 @@ $white: rgb(239, 237, 237, 1);
 //   z-index: 1;
 // }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+
 @media (max-width: $mobile-breakpoint) {
   .section-wrapper {
     padding: 1rem 0.5rem 1rem 0.5rem;
@@ -130,21 +140,22 @@ $white: rgb(239, 237, 237, 1);
   .router-wrapper {
     position:relative;
     top:0;
-    padding: 8rem 0 0 0;
+    padding: 7.2rem 0 0 0;
     width: 100%;
   }
 
   .header-wrapper {
-  position: relative;
-  height: 8rem;
-  width: 100%;
-  background: linear-gradient(rgba(130, 120, 141, 0.8), rgba(140, 139, 141, 0.44)), url('/lk_banner_new.png') no-repeat center center;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  // background-color: rgba(186, 118, 242, 0.5); // purple with 50% opacity
-}
+    position: relative;
+    height: 8rem;
+    width: 100%;
+    background-color: $lk_brown;
+    // background: linear-gradient(rgba(130, 120, 141, 0.8), rgba(140, 139, 141, 0.44)), url('/lk_banner_new.png') no-repeat center center;
+    // background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background-color: rgba(186, 118, 242, 0.5); // purple with 50% opacity
+  }
 
 .text-wrapper {
   padding: 0 1rem 0 1rem;
