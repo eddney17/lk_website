@@ -18,7 +18,7 @@ $green: rgb(0, 200, 83);
 .section-subheader{
     text-align: center;
     color: $lk_brown;
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
 
@@ -81,7 +81,7 @@ $green: rgb(0, 200, 83);
 }
 
 .values-card-icn{
-    font-size: 10rem;
+    font-size: 8rem;
     color: $lk_brown
 }
 
@@ -107,4 +107,11 @@ $green: rgb(0, 200, 83);
         font-size: 7rem;
         color: $lk_brown
     }
+
+    .section-subheader{
+    text-align: center;
+    color: $lk_brown;
+    font-size: 2rem;
+}
+
 }
