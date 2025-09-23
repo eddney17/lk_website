@@ -32,7 +32,7 @@ export class Testimonials {
       image: '/lk_item_keychain.png',
       alt: 'personalized_keychain',
       username: 'eliebs',
-      text: 'This is my go to shop whenver I need personalized gifts and home/school essentials. Their items are made with quality materials plus they do clean and precise engraving! Not to mention the fast delivery of items. For this tumbler, I ordered it morning of June 6. It arrived around 1pm of June 8. Definitely 5 start!!'
+      text: 'This is my go to shop whenver I need personalized gifts and home/school essentials. Their items are made with quality materials plus they do clean and precise engraving! Not to mention the fast delivery of items. For this tumbler, I ordered it morning of June 6. It arrived around 1pm of June 8. Definitely 5 stars!!'
     },
     {
       image: '/lk_item_keychain.png',

@@ -88,4 +88,12 @@ $mobile-breakpoint: 600px;
     
     }
 
+    .testimonial-card {
+        width: 20rem;
+        min-width: 20rem;
+        max-width: 20rem;
+        min-height: 0;
+        position: relative;
+    }
+
 }
