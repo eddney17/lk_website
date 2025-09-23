@@ -1,0 +1,29 @@
+<div class="testimonials-carousel">
+  <button class="testimonial-btn prev" (click)="prev()">&#10094;</button>
+  <div class="testimonial-card">
+    <div class="testimonial-image">
+      <img [src]="testimonials[current].image" [alt]="testimonials[current].alt" />
+    </div>
+    <h2 class="testimonial-usertext">{{ testimonials[current].username }}</h2>
+    <h2 class="">
+        <span class="testimonial-rating material-symbols-outlined">
+        star_rate
+        </span>
+        <span class="testimonial-rating material-symbols-outlined">
+        star_rate
+        </span><span class="testimonial-rating material-symbols-outlined">
+        star_rate
+        </span><span class="testimonial-rating material-symbols-outlined">
+        star_rate
+        </span><span class="testimonial-rating material-symbols-outlined">
+        star_rate
+        </span>
+    </h2>
+    <div class="testimonial-text italic">
+      <p>"{{ testimonials[current].text }}"</p>
+    </div>
+  </div>
+  <button class="testimonial-btn next" (click)="next()">&#10095;</button>
+
+ 
+</div>

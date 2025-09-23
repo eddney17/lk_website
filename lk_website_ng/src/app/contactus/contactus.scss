@@ -1,13 +1,25 @@
+$mobile-breakpoint: 600px;
 $darkgrey: rgb(59, 58, 58);
 $lk_brown:rgb(91, 35, 15);
 
 .contactus {
-    max-width: 700px;
-    margin: 3rem auto;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+    margin: 0 15rem 0 15rem;
+    padding: 0 0rem 7rem 0rem;
+    background: #ffffff;
+    // max-width: 700px;
+    // margin: 3rem auto;
+    // padding: 2rem;
+    // background: #fff;
+    // border-radius: 1rem;
+    // box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.form-wrapper{
+    padding: 0 10rem 0 10rem;
+}
+.contactus p {
+    font-size: 1.3rem;
 }
 .contactus h1 {
     text-align: center;
@@ -47,3 +59,17 @@ $lk_brown:rgb(91, 35, 15);
     justify-content: center;
     text-align: center;
 }
+
+@media (max-width: $mobile-breakpoint) {
+    .contactus {
+        margin: 0 1rem 0 1rem;
+    }
+    .form-wrapper{
+    padding: 0 1rem 0 1rem;
+    }
+    .contactus button {
+        width: 100%;
+    }
+
+}
+

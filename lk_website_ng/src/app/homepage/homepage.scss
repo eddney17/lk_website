@@ -28,7 +28,11 @@ $purple: #ba76f2;
 }
 
 .banner-overlay {
-    position: absolute;
+    // position: absolute;
+    padding: 2rem;
+    background: url('/lk_bannerv2.png') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
     top: 7.5rem;
     left: 0;
     right: 0;
@@ -52,13 +56,13 @@ $purple: #ba76f2;
     color: #555;
 }
 
-.banner-image img {
-    height: 100vh;
-    width: 100%;  
-    object-fit: cover;
-    align-items: center;
-    display: block;
-}
+// .banner-image img {
+//     height: 100vh;
+//     width: 100%;  
+//     object-fit: cover;
+//     align-items: center;
+//     display: block;
+// }
 
 .customize-button {
     background: transparent;
@@ -190,10 +194,13 @@ $purple: #ba76f2;
 
         font-size: 0.7rem;
         height: 100vh;
-        width: 100%;  
-        // align-items: center;
-        // display: block;
+        width: 100%; 
 
+    }
+
+    .banner-overlay {
+        height: 30rem;
+        padding: 1rem;
     }
 
 
