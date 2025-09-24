@@ -20,12 +20,16 @@ $green: rgb(0, 200, 83);
 .purple {
     color: rgb(157, 15, 157) !important;
 }
+.gray{
+    color: rgb(97, 97, 97) !important;
+}
 
 .section-subheader{
     text-align: center;
     color: $lk_brown;
     font-size: 2rem;
-    margin-bottom: 0rem;
+    margin-bottom: 0.5rem;
+    margin-top: 3rem;
 }
 
 

@@ -1,7 +1,7 @@
 <div class="carousel">
   <button class="carousel-btn prev" (click)="prev()">&#10094;</button>
-  <div class="carousel-track" [style.transform]="'translateX(-' + (current * 100) + '%)'">
-    <img *ngFor="let img of images" [src]="img" />
+  <div class="carousel-track" [style.transform]="trackTransform" [style.transition]="transition" (transitionend)="onTransitionEnd()">
+    <img *ngFor="let img of displayImages" [src]="img" />
   </div>
   <button class="carousel-btn next" (click)="next()">&#10095;</button>
 </div>

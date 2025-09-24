@@ -151,7 +151,7 @@ $purple: #ba76f2;
 }
 
 .achievements {
-    background-color: $lk_light_brown;
+    background-color: $lk_brown;
     color: white;
     display: flex;
         flex-wrap: wrap;
@@ -229,6 +229,18 @@ $purple: #ba76f2;
     .banner-overlay {
         height: 30rem;
         padding: 1rem;
+    }
+
+    
+    .achievement-icn {
+        font-size: 4rem;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .achievement-card p{
+        font-size: 1rem;
+        font-weight: 300;
     }
 
 
