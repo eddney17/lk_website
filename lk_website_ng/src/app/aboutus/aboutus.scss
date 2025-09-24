@@ -14,11 +14,18 @@ $green: rgb(0, 200, 83);
 .green {
     color: $green !important;
 }
+.navy-blue {
+    color: rgb(0, 0, 128) !important;
+}
+.purple {
+    color: rgb(157, 15, 157) !important;
+}
 
 .section-subheader{
     text-align: center;
     color: $lk_brown;
     font-size: 2rem;
+    margin-bottom: 0rem;
 }
 
 

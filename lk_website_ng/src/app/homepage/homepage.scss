@@ -2,6 +2,7 @@ $fa-star-color: yellow;
 
 $mobile-breakpoint: 600px;
 $lk_brown:rgb(91, 35, 15);
+$lk_light_brown:rgb(144, 62, 32);
 $darkgrey: rgb(59, 58, 58);
 $lightgrey:rgb(95, 94, 94);
 $purple: #ba76f2;
@@ -147,6 +148,33 @@ $purple: #ba76f2;
 .section {
     padding: 3rem 0 0 0;
     justify-items: center;
+}
+
+.achievements {
+    background-color: $lk_light_brown;
+    color: white;
+    display: flex;
+        flex-wrap: wrap;
+}
+
+.achievement-card {
+    flex:1;
+    margin: 2rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+.achievement-icn {
+    font-size: 6rem;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.achievement-card p{
+    font-size: 2rem;
+    font-weight: 300;
 }
 
 @media (max-width: $mobile-breakpoint) {

@@ -65,7 +65,7 @@ $white: rgb(239, 237, 237, 1);
 
 .section-header {
     color: $lk_brown;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 .text-wrapper {
@@ -74,6 +74,7 @@ $white: rgb(239, 237, 237, 1);
 
 .text-wrapper p {
   // text-indent: 1rem;
+  margin-top: 0.2rem;
   text-align: justify;
 }
 
@@ -98,6 +99,7 @@ $white: rgb(239, 237, 237, 1);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 0 3rem 0;
   // background-color: rgba(186, 118, 242, 0.5); // purple with 50% opacity
 }
 
