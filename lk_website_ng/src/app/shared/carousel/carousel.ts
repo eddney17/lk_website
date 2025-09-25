@@ -51,7 +51,7 @@ export class Carousel implements OnInit, OnDestroy {
   ngOnInit() {
     this.intervalId = setInterval(() => {
       this.next();
-    }, 3000);
+    }, 5000);
   }
 
   ngOnDestroy() {
@@ -68,6 +68,12 @@ export class Carousel implements OnInit, OnDestroy {
         this._noTransition = false;
         this.current--;
       });
+
+      this.intervalId = setInterval(() => {
+        this.next();
+      }, 5000);
+
+      
     } else {
       this.current--;
     }
