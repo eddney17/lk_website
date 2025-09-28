@@ -22,7 +22,6 @@ export class Testimonials {
       username: 'periwinkle_10k',
       text: 'The seller is kind and easy to transact with. The quality of the product is good,'
     },
-     {,
     {
       image: '/lk_item_keychain.png',
       alt: 'personalized_keychain',
