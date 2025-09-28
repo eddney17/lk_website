@@ -10,18 +10,19 @@ import { CommonModule } from '@angular/common';
 })
 export class Testimonials {
   testimonials = [
+    {      
+      image: '/lk_item_keychain.png',
+      alt: 'personalized_keychain',
+      username: 'imeegarcia400',
+      text: 'Quality materials, handy, and cute! More than what I expected, so happy for my purchase. Seller is very accomodating, looking forward for my next order. Thank you seller!'
+    },    
     {
       image: '/lk_item_keychain.png',
       alt: 'personalized_keychain',
       username: 'periwinkle_10k',
       text: 'The seller is kind and easy to transact with. The quality of the product is good,'
     },
-     {
-      image: '/lk_item_keychain.png',
-      alt: 'personalized_keychain',
-      username: 'imeegarcia400',
-      text: 'Quality materials, handy, and cute! More that what I expected, so happy for my purchase. Seller is very accomodating, looking forward for my next order. Thank you seller!'
-    },
+     {,
     {
       image: '/lk_item_keychain.png',
       alt: 'personalized_keychain',
