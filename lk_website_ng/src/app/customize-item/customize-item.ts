@@ -3,12 +3,9 @@ import {
   computed,
   ElementRef,
   HostListener,
-  inject,
-  PLATFORM_ID,
   signal,
   ViewChild,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   PRODUCT_TEMPLATES,
@@ -30,8 +27,6 @@ interface DragState {
   styleUrls: ['./customize-item.scss', './customize-item.fonts.scss'],
 })
 export class CustomizeItem {
-  private readonly platformId = inject(PLATFORM_ID);
-
   readonly productTemplates = PRODUCT_TEMPLATES;
   readonly fontOptions = FONT_OPTIONS;
 
@@ -135,9 +130,6 @@ export class CustomizeItem {
   }
 
   onLayerPointerDown(event: PointerEvent, layerId: string): void {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
     event.preventDefault();
     event.stopPropagation();
     this.selectedLayerId.set(layerId);
@@ -189,7 +181,7 @@ export class CustomizeItem {
   }
 
   async downloadImage(): Promise<void> {
-    if (!isPlatformBrowser(this.platformId) || this.isDownloading()) {
+    if (this.isDownloading()) {
       return;
     }
 
