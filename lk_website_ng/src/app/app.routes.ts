@@ -6,5 +6,10 @@ import { ContactUs } from './contactus/contactus';
 export const routes: Routes = [
     { path: '', component: Homepage },
     { path: 'about', component: AboutUs },
-    { path: 'contact', component: ContactUs }
+    { path: 'contact', component: ContactUs },
+    {
+        path: 'customize-item',
+        loadComponent: () =>
+            import('./customize-item/customize-item').then((m) => m.CustomizeItem),
+    },
 ];

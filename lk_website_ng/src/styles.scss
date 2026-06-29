@@ -135,6 +135,27 @@ $white: rgb(239, 237, 237, 1);
     margin-top: 3rem;
 }
 
+.flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-end {
+  justify-content: end;
+}
+
+
+.flex-item-1 {
+  flex: 1;
+}
+
 
 @media (max-width: $mobile-breakpoint) {
     .section-wrapper {

@@ -1,0 +1,153 @@
+<div class="customize-item">
+  <h1 class="section-header f-color-lkbrown">Customize Your Item <span class="beta-badge">BETA</span></h1>
+
+  <div class="editor-layout">
+    <div class="canvas-section">
+      <div #canvasContainer class="canvas-container">
+        <img
+          #canvasImage
+          class="canvas-image"
+          [src]="selectedTemplate().imageSrc"
+          [alt]="selectedTemplate().label"
+          (load)="onCanvasImageLoad()"
+        />
+        @for (layer of textLayers(); track layer.id) {
+          <div
+            class="text-layer"
+            [class.selected]="layer.id === selectedLayerId()"
+            [style.left.px]="layer.x"
+            [style.top.px]="layer.y"
+            [style.font-size.px]="layer.fontSize"
+            [style.font-family]="layer.fontFamily"
+            [style.transform]="layerTransform(layer)"
+            (pointerdown)="onLayerPointerDown($event, layer.id)"
+          >
+            {{ layer.content }}
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="controls-panel">
+      <section class="control-group">
+        <h2 class="control-label">Product</h2>
+        <div class="product-select" (click)="$event.stopPropagation()">
+          <button
+            type="button"
+            class="product-select-trigger"
+            [attr.aria-expanded]="productDropdownOpen()"
+            aria-haspopup="listbox"
+            (click)="toggleProductDropdown($event)"
+          >
+            <img
+              class="product-select-thumb"
+              [src]="thumbnailSrc(selectedTemplate())"
+              [alt]="selectedTemplate().label"
+            />
+            <span class="product-select-label">{{ selectedTemplate().label }}</span>
+            <span class="product-select-chevron" [class.open]="productDropdownOpen()">▾</span>
+          </button>
+
+          @if (productDropdownOpen()) {
+            <div class="product-select-menu" role="listbox">
+              @for (template of productTemplates; track template.id) {
+                <button
+                  type="button"
+                  class="product-select-option"
+                  role="option"
+                  [class.selected]="template.id === selectedProductId()"
+                  [attr.aria-selected]="template.id === selectedProductId()"
+                  (click)="selectProduct(template.id)"
+                >
+                  <img
+                    class="product-select-thumb"
+                    [src]="thumbnailSrc(template)"
+                    [alt]="template.label"
+                  />
+                  <span>{{ template.label }}</span>
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </section>
+
+      <section class="control-group">
+        <button
+          type="button"
+          class="action-button primary-button"
+          [disabled]="isDownloading()"
+          (click)="downloadImage()"
+        >
+          {{ isDownloading() ? 'Preparing…' : 'Download Image' }}
+        </button>
+      </section>
+      <div class="layer-list-container">
+          <section class="control-group">
+            <div class="flex align-items-center">
+              <h2 class="control-label flex-item-1">Text Layers</h2>
+              <button id="add-text-button" type="button" class="action-button primary-button" (click)="addText()">+</button> 
+            </div>
+     
+            <div class="layer-list">
+              @for (layer of textLayers(); track layer.id; let i = $index) {
+                <div class="layer-item-container flex align-items-center" [class.selected]="layer.id === selectedLayerId()" (click)="selectLayer(layer.id)">
+                  <h1 class="flex-item-1">Text {{ i + 1 }}: {{ layer.content || '(empty)' }} </h1>
+                  <button id="delete-text-button" type="button" class="delete-button" (click)="deleteSelectedLayer(layer.id)">-</button>         
+                </div>
+                @if (selectedLayerId() === layer.id) {
+                  <div class="layer-editor-container">
+                    <section class="control-group">            
+                      <label class="field-label" for="text-content">Content</label>
+                      <input
+                        id="text-content"
+                        type="text"
+                        class="text-input"
+                        [ngModel]="layer.content"
+                        (ngModelChange)="updateSelectedLayer({ content: $event })"
+                      />            
+                      <label class="field-label" for="font-family">Font</label>
+                      <select
+                        id="font-family"
+                        class="text-input font-select"
+                        [ngModel]="layer.fontFamily"
+                        (ngModelChange)="updateSelectedLayer({ fontFamily: $event })"
+                      >
+                        @for (font of fontOptions; track font.id) {
+                          <option [value]="font.family" [style.font-family]="font.family">
+                            {{ font.label }}
+                          </option>
+                        }
+                      </select>
+            
+                      <label class="field-label" for="font-size">Font size ({{ layer.fontSize }}px)</label>
+                      <input
+                        id="font-size"
+                        type="range"
+                        min="12"
+                        max="72"
+                        [ngModel]="layer.fontSize"
+                        (ngModelChange)="updateSelectedLayer({ fontSize: +$event })"
+                      />            
+                      <label class="field-label" for="rotation">Rotation ({{ layer.rotation }}°)</label>
+                      <input
+                        id="rotation"
+                        type="range"
+                        min="-360"
+                        max="360"
+                        [ngModel]="layer.rotation"
+                        (ngModelChange)="updateSelectedLayer({ rotation: +$event })"
+                      />
+                    </section>
+                  </div>
+                 
+                }
+              }
+            </div>
+          </section>        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
