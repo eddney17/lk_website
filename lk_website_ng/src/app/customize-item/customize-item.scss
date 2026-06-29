@@ -276,11 +276,18 @@ $lightgrey: rgb(95, 94, 94);
 
   h1 {
     font-size: 0.8rem !important;
+    color: $lk_brown;
+    font-weight: 400;
   }
   &.selected {
     background: $lk_brown;
     color: white;
     font-weight: 600;
+
+    h1 {
+      color: white;
+      font-weight: 600;
+    }
   }
 
   
