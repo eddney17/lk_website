@@ -208,6 +208,12 @@ $white: rgb(239, 237, 237, 1);
   margin-bottom: 0;
 }
 
+.love-your-design {
+  p {
+    font-size: 0.8rem;
+  }
+}
+
 
 @media (max-width: $mobile-breakpoint) {
     .section-wrapper {
@@ -254,6 +260,8 @@ $white: rgb(239, 237, 237, 1);
       color: $lk_brown;
       font-size: 1.5rem;
     }
+
+    
 
 
 

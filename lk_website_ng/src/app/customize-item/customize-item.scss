@@ -7,6 +7,15 @@ $lightgrey: rgb(95, 94, 94);
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 2rem 4rem;
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+  }
 }
 
 .editor-layout {
@@ -52,6 +61,34 @@ $lightgrey: rgb(95, 94, 94);
     outline: 2px dashed $lk_brown;
     outline-offset: 2px;
   }
+
+  &.editing {
+    cursor: text;
+    outline: 2px solid $lk_brown;
+    outline-offset: 2px;
+  }
+}
+
+.text-layer-label {
+  display: inline-block;
+  pointer-events: none;
+}
+
+.text-layer-input {
+  display: block;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #000;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  line-height: inherit;
+  min-width: 6ch;
+  width: 100%;
+  cursor: text;
+  touch-action: auto;
 }
 
 .resize-handle {
@@ -363,5 +400,47 @@ input[type='range'] {
 
   .editor-layout {
     grid-template-columns: 1fr;
+  }
+}
+
+// Prevent sticky :hover/:focus styles on touch devices after tap
+@media (hover: none) and (pointer: coarse) {
+  .customize-item {
+    button:focus {
+      outline: none;
+    }
+
+    .action-button:hover:not(:disabled) {
+      border-color: $lightgrey;
+      background: transparent;
+      color: $lightgrey;
+    }
+
+    .action-button.primary-button:hover:not(:disabled) {
+      border-color: $lk_brown;
+      background: transparent;
+      color: $lk_brown;
+    }
+
+    .delete-button:hover {
+      color: $lk_brown;
+      background: transparent;
+    }
+
+    .selected .delete-button:hover {
+      border-color: white;
+      color: white;
+      background: $lk_brown;
+    }
+
+    .product-select-trigger:hover:not([aria-expanded='true']) {
+      border-color: #ccc;
+    }
+
+    .product-select-option:hover:not(.selected) {
+      background: #fff;
+      color: $darkgrey;
+      font-weight: 400;
+    }
   }
 }

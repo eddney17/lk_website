@@ -1,4 +1,4 @@
-<div class="customize-item">
+<div class="customize-item" (click)="blurClickedButton($event)">
   <h1 class="section-header f-color-lkbrown">Customize Your Item <span class="beta-badge">BETA</span></h1>
 
   <div class="editor-layout">
@@ -15,15 +15,31 @@
           <div
             class="text-layer"
             [class.selected]="layer.id === selectedLayerId()"
+            [class.editing]="layer.id === editingLayerId()"
             [style.left.px]="layer.x"
             [style.top.px]="layer.y"
             [style.font-size.px]="layer.fontSize"
             [style.font-family]="layer.fontFamily"
             [style.transform]="layerTransform(layer)"
             (pointerdown)="onLayerPointerDown($event, layer.id)"
+            (dblclick)="onLayerDoubleClick($event, layer.id)"
           >
-            {{ layer.content }}
-            @if (layer.id === selectedLayerId()) {
+            @if (layer.id === editingLayerId()) {
+              <input
+                class="text-layer-input"
+                type="text"
+                [attr.data-layer-input]="layer.id"
+                [ngModel]="layer.content"
+                (ngModelChange)="updateLayer(layer.id, { content: $event })"
+                (pointerdown)="$event.stopPropagation()"
+                (dblclick)="$event.stopPropagation()"
+                (blur)="stopEditingLayer()"
+                (keydown)="onLayerInputKeydown($event, layer.id)"
+              />
+            } @else {
+              <span class="text-layer-label">{{ layer.content }}</span>
+            }
+            @if (layer.id === selectedLayerId() && layer.id !== editingLayerId()) {
               <span class="rotate-connector" aria-hidden="true"></span>
               <span
                 class="rotate-handle"
@@ -91,7 +107,7 @@
           <section class="control-group">
             <div class="flex align-items-center">
               <h2 class="control-label flex-item-1">Text Layers</h2>
-              <button id="add-text-button" type="button" class="action-button primary-button" (click)="addText()">+</button> 
+              <button id="add-text-button" type="button" class="action-button" (click)="addText()">+</button> 
             </div>
      
             <div class="layer-list">
@@ -152,7 +168,7 @@
           </section>        
       </div>
 
-      <div>
+      <div class="love-your-design">
         <h3 class="mt-0-5 mb-0">Love your design? ❤️</h3>
         <p class="mt-0-5 mb-0 text-justify">
           Once you're satisfied with your design, click Download Image and send us the downloaded image or a screenshot together with your order.

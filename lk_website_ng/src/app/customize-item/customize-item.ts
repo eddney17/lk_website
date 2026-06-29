@@ -42,6 +42,7 @@ type InteractionState = DragState | ResizeState | RotateState;
 
 const MIN_FONT_SIZE = 12;
 const MAX_FONT_SIZE = 120;
+const DEFAULT_TEXT_CONTENT = 'Your Text';
 
 @Component({
   selector: 'app-customize-item',
@@ -60,6 +61,7 @@ export class CustomizeItem {
   readonly canvasSize = signal({ width: 0, height: 0 });
   readonly isDownloading = signal(false);
   readonly productDropdownOpen = signal(false);
+  readonly editingLayerId = signal<string | null>(null);
 
   readonly selectedTemplate = computed(
     () =>
@@ -75,6 +77,7 @@ export class CustomizeItem {
   @ViewChild('canvasImage') canvasImage!: ElementRef<HTMLImageElement>;
 
   private interactionState: InteractionState | null = null;
+  private editStartContent = '';
   private readonly onPointerMove = (event: PointerEvent) => this.handlePointerMove(event);
   private readonly onPointerUp = () => this.endInteraction();
 
@@ -83,6 +86,7 @@ export class CustomizeItem {
     if (id === this.selectedProductId()) {
       return;
     }
+    this.editingLayerId.set(null);
     this.selectedProductId.set(id);
     this.textLayers.set([]);
     this.selectedLayerId.set(null);
@@ -98,11 +102,25 @@ export class CustomizeItem {
     this.productDropdownOpen.set(false);
   }
 
+  blurClickedButton(event: Event): void {
+    const target = event.target;
+    if (!(target instanceof HTMLButtonElement)) {
+      return;
+    }
+    queueMicrotask(() => target.blur());
+  }
+
   onCanvasImageLoad(): void {
     this.updateCanvasSize();
+    if (this.textLayers().length === 0) {
+      this.setDefaultTextLayer();
+    }
   }
 
   onCanvasPointerDown(): void {
+    if (this.editingLayerId()) {
+      this.stopEditingLayer();
+    }
     this.selectedLayerId.set(null);
   }
 
@@ -114,22 +132,35 @@ export class CustomizeItem {
     this.canvasSize.set({ width: el.clientWidth, height: el.clientHeight });
   }
 
-  addText(): void {
+  private createTextLayer(content = DEFAULT_TEXT_CONTENT): TextLayer {
     const size = this.canvasSize();
-    const layer: TextLayer = {
+    return {
       id: crypto.randomUUID(),
-      content: 'Your text',
+      content,
       x: size.width / 2 || 200,
       y: size.height / 2 || 150,
       rotation: 0,
       fontSize: 24,
       fontFamily: DEFAULT_FONT_FAMILY,
     };
+  }
+
+  private setDefaultTextLayer(): void {
+    const layer = this.createTextLayer();
+    this.textLayers.set([layer]);
+    this.selectedLayerId.set(layer.id);
+  }
+
+  addText(): void {
+    const layer = this.createTextLayer();
     this.textLayers.update((layers) => [...layers, layer]);
     this.selectedLayerId.set(layer.id);
   }
 
   selectLayer(id: string): void {
+    if (this.editingLayerId()) {
+      this.stopEditingLayer();
+    }
 
     if (id === this.selectedLayerId()) {
       this.selectedLayerId.set(null);
@@ -142,6 +173,9 @@ export class CustomizeItem {
     const id = selectedId ?? this.selectedLayerId();
     if (!id) {
       return;
+    }
+    if (this.editingLayerId() === id) {
+      this.editingLayerId.set(null);
     }
     this.textLayers.update((layers) => layers.filter((l) => l.id !== id));
     this.selectedLayerId.set(null);
@@ -158,6 +192,9 @@ export class CustomizeItem {
   }
 
   onLayerPointerDown(event: PointerEvent, layerId: string): void {
+    if (this.editingLayerId() === layerId) {
+      return;
+    }
     event.preventDefault();
     event.stopPropagation();
     this.selectedLayerId.set(layerId);
@@ -173,6 +210,51 @@ export class CustomizeItem {
       offsetY: event.clientY - rect.top - layer.y,
     };
     this.attachPointerListeners();
+  }
+
+  onLayerDoubleClick(event: MouseEvent, layerId: string): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.endInteraction();
+    this.startEditingLayer(layerId);
+  }
+
+  startEditingLayer(layerId: string): void {
+    const layer = this.textLayers().find((l) => l.id === layerId);
+    if (!layer) {
+      return;
+    }
+    this.editStartContent = layer.content;
+    this.selectedLayerId.set(layerId);
+    this.editingLayerId.set(layerId);
+    queueMicrotask(() => {
+      const input = document.querySelector<HTMLInputElement>(
+        `[data-layer-input="${layerId}"]`,
+      );
+      input?.focus();
+      input?.select();
+    });
+  }
+
+  stopEditingLayer(): void {
+    this.editingLayerId.set(null);
+  }
+
+  cancelEditingLayer(layerId: string): void {
+    this.updateLayer(layerId, { content: this.editStartContent });
+    this.editingLayerId.set(null);
+  }
+
+  onLayerInputKeydown(event: KeyboardEvent, layerId: string): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      (event.target as HTMLInputElement).blur();
+      return;
+    }
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.cancelEditingLayer(layerId);
+    }
   }
 
   onResizePointerDown(event: PointerEvent, layerId: string): void {
@@ -260,7 +342,7 @@ export class CustomizeItem {
     this.updateLayer(state.layerId, { rotation });
   }
 
-  private updateLayer(layerId: string, partial: Partial<Omit<TextLayer, 'id'>>): void {
+  updateLayer(layerId: string, partial: Partial<Omit<TextLayer, 'id'>>): void {
     this.textLayers.update((layers) =>
       layers.map((l) => (l.id === layerId ? { ...l, ...partial } : l)),
     );
