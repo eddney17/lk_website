@@ -83,9 +83,12 @@ $purple: #ba76f2;
     }
 
     .navbar-links {
-            display: inline-block;         
+            display: inline-flex;         
             list-style-type: none;
             padding-inline-start: 0;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
     }
     // .navbar,
     // .navbar-flex,
