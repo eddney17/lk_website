@@ -88,7 +88,9 @@ $lightgrey: rgb(95, 94, 94);
   min-width: 6ch;
   width: 100%;
   cursor: text;
-  touch-action: auto;
+  touch-action: manipulation;
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 .resize-handle {

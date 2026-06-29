@@ -18,6 +18,10 @@ interface DragState {
   layerId: string;
   offsetX: number;
   offsetY: number;
+  startClientX: number;
+  startClientY: number;
+  hasMoved: boolean;
+  wasAlreadySelected: boolean;
 }
 
 interface ResizeState {
@@ -43,6 +47,7 @@ type InteractionState = DragState | ResizeState | RotateState;
 const MIN_FONT_SIZE = 12;
 const MAX_FONT_SIZE = 120;
 const DEFAULT_TEXT_CONTENT = 'Your Text';
+const TAP_MOVE_THRESHOLD = 8;
 
 @Component({
   selector: 'app-customize-item',
@@ -195,8 +200,8 @@ export class CustomizeItem {
     if (this.editingLayerId() === layerId) {
       return;
     }
-    event.preventDefault();
     event.stopPropagation();
+    const wasAlreadySelected = this.selectedLayerId() === layerId;
     this.selectedLayerId.set(layerId);
     const layer = this.textLayers().find((l) => l.id === layerId);
     if (!layer || !this.canvasContainer?.nativeElement) {
@@ -208,6 +213,10 @@ export class CustomizeItem {
       layerId,
       offsetX: event.clientX - rect.left - layer.x,
       offsetY: event.clientY - rect.top - layer.y,
+      startClientX: event.clientX,
+      startClientY: event.clientY,
+      hasMoved: false,
+      wasAlreadySelected,
     };
     this.attachPointerListeners();
   }
@@ -219,7 +228,7 @@ export class CustomizeItem {
     this.startEditingLayer(layerId);
   }
 
-  startEditingLayer(layerId: string): void {
+  startEditingLayer(layerId: string, focusAfterRender = false): void {
     const layer = this.textLayers().find((l) => l.id === layerId);
     if (!layer) {
       return;
@@ -227,13 +236,23 @@ export class CustomizeItem {
     this.editStartContent = layer.content;
     this.selectedLayerId.set(layerId);
     this.editingLayerId.set(layerId);
-    queueMicrotask(() => {
+
+    const focusInput = (): void => {
       const input = document.querySelector<HTMLInputElement>(
         `[data-layer-input="${layerId}"]`,
       );
       input?.focus();
       input?.select();
-    });
+    };
+
+    if (focusAfterRender) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(focusInput);
+      });
+      return;
+    }
+
+    queueMicrotask(focusInput);
   }
 
   stopEditingLayer(): void {
@@ -318,6 +337,17 @@ export class CustomizeItem {
     const state = this.interactionState;
 
     if (state.mode === 'drag') {
+      if (!state.hasMoved) {
+        const movedDistance = Math.hypot(
+          event.clientX - state.startClientX,
+          event.clientY - state.startClientY,
+        );
+        if (movedDistance < TAP_MOVE_THRESHOLD) {
+          return;
+        }
+        state.hasMoved = true;
+      }
+
       const x = Math.max(0, Math.min(rect.width, pointerX - state.offsetX));
       const y = Math.max(0, Math.min(rect.height, pointerY - state.offsetY));
       this.updateLayer(state.layerId, { x, y });
@@ -349,6 +379,17 @@ export class CustomizeItem {
   }
 
   private endInteraction(): void {
+    const state = this.interactionState;
+
+    if (
+      state?.mode === 'drag' &&
+      !state.hasMoved &&
+      state.wasAlreadySelected &&
+      this.editingLayerId() !== state.layerId
+    ) {
+      this.startEditingLayer(state.layerId, true);
+    }
+
     this.interactionState = null;
     document.removeEventListener('pointermove', this.onPointerMove);
     document.removeEventListener('pointerup', this.onPointerUp);
