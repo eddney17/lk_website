@@ -3,7 +3,7 @@
 
   <div class="editor-layout">
     <div class="canvas-section">
-      <div #canvasContainer class="canvas-container">
+      <div #canvasContainer class="canvas-container" (pointerdown)="onCanvasPointerDown()">
         <img
           #canvasImage
           class="canvas-image"
@@ -23,6 +23,19 @@
             (pointerdown)="onLayerPointerDown($event, layer.id)"
           >
             {{ layer.content }}
+            @if (layer.id === selectedLayerId()) {
+              <span class="rotate-connector" aria-hidden="true"></span>
+              <span
+                class="rotate-handle"
+                title="Drag to rotate"
+                (pointerdown)="onRotatePointerDown($event, layer.id)"
+              ></span>
+              <span
+                class="resize-handle"
+                title="Drag to resize"
+                (pointerdown)="onResizePointerDown($event, layer.id)"
+              ></span>
+            }
           </div>
         }
       </div>
@@ -71,16 +84,8 @@
           }
         </div>
       </section>
-
       <section class="control-group">
-        <button
-          type="button"
-          class="action-button primary-button"
-          [disabled]="isDownloading()"
-          (click)="downloadImage()"
-        >
-          {{ isDownloading() ? 'Preparing…' : 'Download Image' }}
-        </button>
+        
       </section>
       <div class="layer-list-container">
           <section class="control-group">
@@ -125,7 +130,7 @@
                         id="font-size"
                         type="range"
                         min="12"
-                        max="72"
+                        max="120"
                         [ngModel]="layer.fontSize"
                         (ngModelChange)="updateSelectedLayer({ fontSize: +$event })"
                       />            
@@ -146,6 +151,27 @@
             </div>
           </section>        
       </div>
+
+      <div>
+        <h3 class="mt-0-5 mb-0">Love your design? ❤️</h3>
+        <p class="mt-0-5 mb-0 text-justify">
+          Once you're satisfied with your design, click Download Image and send us the downloaded image or a screenshot together with your order.
+        </p>
+        <div class="flex align-items-center">
+          <button
+          type="button"
+          class="action-button primary-button mt-0-5 flex-item-1"
+          [disabled]="isDownloading()"
+          (click)="downloadImage()"
+          >
+            {{ isDownloading() ? 'Preparing…' : 'Download Image' }}
+          </button> 
+        </div>
+       
+
+      </div>
+
+      
 
       
     </div>

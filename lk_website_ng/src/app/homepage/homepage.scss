@@ -177,6 +177,16 @@ $purple: #ba76f2;
     font-weight: 300;
 }
 
+
+.customize-item-text {
+    padding: 5rem 0 0 0;
+    font-size: 1.5rem;
+  }
+
+  .customize-router-link {
+    text-align: left;
+    margin-top: 2rem;
+  }
 @media (max-width: $mobile-breakpoint) {
     .products {
         display: flex;
@@ -241,6 +251,25 @@ $purple: #ba76f2;
     .achievement-card p{
         font-size: 1rem;
         font-weight: 300;
+    }
+
+    .customize-item-image {
+        width: 20rem;
+        border-radius: 10%;
+        object-fit: cover;
+        align-items: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .customize-item-text {
+        padding: 0 1.2rem 0 1.2rem;
+        font-size: 1rem;
+    }
+    .customize-router-link {
+        text-align: center;
+        margin-top: 1rem;
     }
 
 

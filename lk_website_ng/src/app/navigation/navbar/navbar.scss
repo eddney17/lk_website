@@ -89,7 +89,12 @@ $purple: #ba76f2;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
+            
+            li {
+                margin: 0.3rem 0.5rem;
+            }
     }
+
     // .navbar,
     // .navbar-flex,
     // .navbar-brand,

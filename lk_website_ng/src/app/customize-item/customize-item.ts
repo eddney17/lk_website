@@ -14,10 +14,34 @@ import {
 import { DEFAULT_FONT_FAMILY, FONT_OPTIONS } from './customize-item.fonts';
 
 interface DragState {
+  mode: 'drag';
   layerId: string;
   offsetX: number;
   offsetY: number;
 }
+
+interface ResizeState {
+  mode: 'resize';
+  layerId: string;
+  startFontSize: number;
+  startDistance: number;
+  centerX: number;
+  centerY: number;
+}
+
+interface RotateState {
+  mode: 'rotate';
+  layerId: string;
+  startRotation: number;
+  startAngle: number;
+  centerX: number;
+  centerY: number;
+}
+
+type InteractionState = DragState | ResizeState | RotateState;
+
+const MIN_FONT_SIZE = 12;
+const MAX_FONT_SIZE = 120;
 
 @Component({
   selector: 'app-customize-item',
@@ -50,9 +74,9 @@ export class CustomizeItem {
   @ViewChild('canvasContainer') canvasContainer!: ElementRef<HTMLElement>;
   @ViewChild('canvasImage') canvasImage!: ElementRef<HTMLImageElement>;
 
-  private dragState: DragState | null = null;
+  private interactionState: InteractionState | null = null;
   private readonly onPointerMove = (event: PointerEvent) => this.handlePointerMove(event);
-  private readonly onPointerUp = () => this.endDrag();
+  private readonly onPointerUp = () => this.endInteraction();
 
   selectProduct(id: string): void {
     this.productDropdownOpen.set(false);
@@ -76,6 +100,10 @@ export class CustomizeItem {
 
   onCanvasImageLoad(): void {
     this.updateCanvasSize();
+  }
+
+  onCanvasPointerDown(): void {
+    this.selectedLayerId.set(null);
   }
 
   updateCanvasSize(): void {
@@ -138,36 +166,108 @@ export class CustomizeItem {
       return;
     }
     const rect = this.canvasContainer.nativeElement.getBoundingClientRect();
-    this.dragState = {
+    this.interactionState = {
+      mode: 'drag',
       layerId,
       offsetX: event.clientX - rect.left - layer.x,
       offsetY: event.clientY - rect.top - layer.y,
     };
+    this.attachPointerListeners();
+  }
+
+  onResizePointerDown(event: PointerEvent, layerId: string): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.selectedLayerId.set(layerId);
+    const layer = this.textLayers().find((l) => l.id === layerId);
+    if (!layer || !this.canvasContainer?.nativeElement) {
+      return;
+    }
+    const rect = this.canvasContainer.nativeElement.getBoundingClientRect();
+    const pointerX = event.clientX - rect.left;
+    const pointerY = event.clientY - rect.top;
+    const dx = pointerX - layer.x;
+    const dy = pointerY - layer.y;
+    this.interactionState = {
+      mode: 'resize',
+      layerId,
+      startFontSize: layer.fontSize,
+      startDistance: Math.hypot(dx, dy) || 1,
+      centerX: layer.x,
+      centerY: layer.y,
+    };
+    this.attachPointerListeners();
+  }
+
+  onRotatePointerDown(event: PointerEvent, layerId: string): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.selectedLayerId.set(layerId);
+    const layer = this.textLayers().find((l) => l.id === layerId);
+    if (!layer || !this.canvasContainer?.nativeElement) {
+      return;
+    }
+    const rect = this.canvasContainer.nativeElement.getBoundingClientRect();
+    const pointerX = event.clientX - rect.left;
+    const pointerY = event.clientY - rect.top;
+    this.interactionState = {
+      mode: 'rotate',
+      layerId,
+      startRotation: layer.rotation,
+      startAngle: Math.atan2(pointerY - layer.y, pointerX - layer.x) * (180 / Math.PI),
+      centerX: layer.x,
+      centerY: layer.y,
+    };
+    this.attachPointerListeners();
+  }
+
+  private attachPointerListeners(): void {
     document.addEventListener('pointermove', this.onPointerMove);
     document.addEventListener('pointerup', this.onPointerUp);
   }
 
   private handlePointerMove(event: PointerEvent): void {
-    if (!this.dragState || !this.canvasContainer?.nativeElement) {
+    if (!this.interactionState || !this.canvasContainer?.nativeElement) {
       return;
     }
     const rect = this.canvasContainer.nativeElement.getBoundingClientRect();
-    const x = Math.max(
-      0,
-      Math.min(rect.width, event.clientX - rect.left - this.dragState.offsetX),
-    );
-    const y = Math.max(
-      0,
-      Math.min(rect.height, event.clientY - rect.top - this.dragState.offsetY),
-    );
-    const layerId = this.dragState.layerId;
+    const pointerX = event.clientX - rect.left;
+    const pointerY = event.clientY - rect.top;
+    const state = this.interactionState;
+
+    if (state.mode === 'drag') {
+      const x = Math.max(0, Math.min(rect.width, pointerX - state.offsetX));
+      const y = Math.max(0, Math.min(rect.height, pointerY - state.offsetY));
+      this.updateLayer(state.layerId, { x, y });
+      return;
+    }
+
+    if (state.mode === 'resize') {
+      const dx = pointerX - state.centerX;
+      const dy = pointerY - state.centerY;
+      const distance = Math.hypot(dx, dy);
+      const scale = distance / state.startDistance;
+      const fontSize = Math.round(
+        Math.min(MAX_FONT_SIZE, Math.max(MIN_FONT_SIZE, state.startFontSize * scale)),
+      );
+      this.updateLayer(state.layerId, { fontSize });
+      return;
+    }
+
+    const currentAngle =
+      Math.atan2(pointerY - state.centerY, pointerX - state.centerX) * (180 / Math.PI);
+    const rotation = Math.round(state.startRotation + (currentAngle - state.startAngle));
+    this.updateLayer(state.layerId, { rotation });
+  }
+
+  private updateLayer(layerId: string, partial: Partial<Omit<TextLayer, 'id'>>): void {
     this.textLayers.update((layers) =>
-      layers.map((l) => (l.id === layerId ? { ...l, x, y } : l)),
+      layers.map((l) => (l.id === layerId ? { ...l, ...partial } : l)),
     );
   }
 
-  private endDrag(): void {
-    this.dragState = null;
+  private endInteraction(): void {
+    this.interactionState = null;
     document.removeEventListener('pointermove', this.onPointerMove);
     document.removeEventListener('pointerup', this.onPointerUp);
   }

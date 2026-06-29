@@ -156,6 +156,58 @@ $white: rgb(239, 237, 237, 1);
   flex: 1;
 }
 
+.flex-gap-1 {
+  gap: 1rem;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.customize-item-image {
+  width: 50rem;
+  border-radius: 10%;
+  object-fit: cover;
+  align-items: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-0-5 {
+  margin-top: 0.5rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+
+
+.mb-0-5 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
 
 @media (max-width: $mobile-breakpoint) {
     .section-wrapper {
@@ -171,7 +223,7 @@ $white: rgb(239, 237, 237, 1);
     .router-wrapper {
       position:relative;
       top:0;
-      padding: 7.2rem 0 0 0;
+      padding: 9.2rem 0 0 0;
       width: 100%;
     }
 
@@ -202,6 +254,7 @@ $white: rgb(239, 237, 237, 1);
       color: $lk_brown;
       font-size: 1.5rem;
     }
+
 
 
 

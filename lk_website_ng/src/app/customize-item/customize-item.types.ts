@@ -38,7 +38,7 @@ export const PRODUCT_TEMPLATES: ProductTemplate[] = [
   },
   {
     id: 'keychain',
-    label: 'Wooden Keychain (Key Ring)',
+    label: 'Wooden Keychain',
     imageSrc: '/lk_edititem_img_wkeychain.png',
   },
   {
