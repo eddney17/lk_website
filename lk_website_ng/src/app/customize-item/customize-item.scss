@@ -58,13 +58,13 @@ $lightgrey: rgb(95, 94, 94);
   padding: 2px 4px;
 
   &.selected {
-    outline: 2px dashed $lk_brown;
+    outline: 1px dashed $lk_brown;
     outline-offset: 2px;
   }
 
   &.editing {
     cursor: text;
-    outline: 2px solid $lk_brown;
+    outline: 1px solid $lk_brown;
     outline-offset: 2px;
   }
 }

@@ -241,8 +241,12 @@ export class CustomizeItem {
       const input = document.querySelector<HTMLInputElement>(
         `[data-layer-input="${layerId}"]`,
       );
-      input?.focus();
-      input?.select();
+      if (!input) {
+        return;
+      }
+      input.focus();
+      const end = input.value.length;
+      input.setSelectionRange(end, end);
     };
 
     if (focusAfterRender) {
