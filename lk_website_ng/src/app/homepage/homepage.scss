@@ -66,9 +66,9 @@ $purple: #ba76f2;
 // }
 
 .customize-button {
-    background: transparent;
-    border: 2px solid $lightgrey;
-    color: $lightgrey;
+    background: $lk_brown;
+    border: 3px solid $lk_brown;
+    color: white;
     padding: 0.75rem 2rem;
     font-size: 1.2rem;
     border-radius: 2rem;
@@ -80,7 +80,7 @@ $purple: #ba76f2;
 .customize-button:hover {
     border-color: $lk_brown;
     color: $lk_brown;
-    font-weight: 400;
+    background: transparent;
 }
 
 
@@ -179,14 +179,25 @@ $purple: #ba76f2;
 
 
 .customize-item-text {
-    padding: 5rem 0 0 0;
-    font-size: 1.5rem;
+    padding: 6rem 0 0 0;
+    line-height: 1.5;
+    font-size: 1.2rem;
   }
 
   .customize-router-link {
     text-align: left;
     margin-top: 2rem;
   }
+
+  .customize-item-image {
+    width: 40rem;
+    border-radius: 10%;
+    object-fit: cover;
+    align-items: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 @media (max-width: $mobile-breakpoint) {
     .products {
         display: flex;
@@ -230,7 +241,7 @@ $purple: #ba76f2;
 
     .customize-button {
 
-        font-size: 0.7rem;
+        font-size: 0.9rem;
         height: 100vh;
         width: 100%; 
 
@@ -264,12 +275,12 @@ $purple: #ba76f2;
     }
 
     .customize-item-text {
-        padding: 0 1.2rem 0 1.2rem;
+        padding: 0 2.5rem 0 2.5rem;
         font-size: 1rem;
     }
     .customize-router-link {
         text-align: center;
-        margin-top: 1rem;
+        margin-top: 2.5rem;
     }
 
 
