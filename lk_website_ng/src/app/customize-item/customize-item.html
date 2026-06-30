@@ -54,6 +54,14 @@
             }
           </div>
         }
+        <div
+          class="canvas-watermark"
+          aria-hidden="true"
+          [style.color]="watermarkColor"
+          [style.opacity]="watermarkOpacity"
+        >
+          {{ watermarkText }}
+        </div>
       </div>
     </div>
 

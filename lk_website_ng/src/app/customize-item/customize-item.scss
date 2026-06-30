@@ -46,6 +46,21 @@ $lightgrey: rgb(95, 94, 94);
   pointer-events: none;
 }
 
+.canvas-watermark {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-family: sans-serif;
+  font-size: clamp(1.25rem, 7vmin, 3rem);
+  line-height: 1.2;
+  text-align: center;
+  user-select: none;
+}
+
 .text-layer {
   position: absolute;
   color: #000;

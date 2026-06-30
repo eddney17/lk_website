@@ -53,6 +53,9 @@ const MIN_FONT_SIZE = 12;
 const MAX_FONT_SIZE = 120;
 const DEFAULT_TEXT_CONTENT = 'Your Text';
 const TAP_MOVE_THRESHOLD = 8;
+const DOWNLOAD_WATERMARK_TEXT = 'www.engravedbylk.com';
+const DOWNLOAD_WATERMARK_OPACITY = 0.1;
+const DOWNLOAD_WATERMARK_COLOR = 'rgb(91, 35, 15)';
 
 @Component({
   selector: 'app-customize-item',
@@ -64,6 +67,9 @@ const TAP_MOVE_THRESHOLD = 8;
 export class CustomizeItem {
   readonly productTemplates = PRODUCT_TEMPLATES;
   readonly fontOptions = FONT_OPTIONS;
+  readonly watermarkText = DOWNLOAD_WATERMARK_TEXT;
+  readonly watermarkOpacity = DOWNLOAD_WATERMARK_OPACITY;
+  readonly watermarkColor = DOWNLOAD_WATERMARK_COLOR;
 
   readonly selectedProductId = signal(PRODUCT_TEMPLATES[0].id);
   readonly textLayers = signal<TextLayer[]>([]);
@@ -438,6 +444,22 @@ export class CustomizeItem {
     return template.thumbnailSrc ?? template.imageSrc;
   }
 
+  private drawDownloadWatermark(
+    ctx: CanvasRenderingContext2D,
+    width: number,
+    height: number,
+  ): void {
+    const fontSize = Math.round(Math.max(28, Math.min(width, height) * 0.07));
+    ctx.save();
+    ctx.globalAlpha = DOWNLOAD_WATERMARK_OPACITY;
+    ctx.fillStyle = DOWNLOAD_WATERMARK_COLOR;
+    ctx.font = `${fontSize}px sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(DOWNLOAD_WATERMARK_TEXT, width / 2, height / 2);
+    ctx.restore();
+  }
+
   async downloadImage(): Promise<void> {
     if (this.isDownloading()) {
       return;
@@ -485,6 +507,8 @@ export class CustomizeItem {
         ctx.fillText(layer.content, 0, 0);
         ctx.restore();
       }
+
+      this.drawDownloadWatermark(ctx, canvas.width, canvas.height);
 
       const blob = await new Promise<Blob | null>((resolve) =>
         canvas.toBlob((b) => resolve(b), 'image/png'),
