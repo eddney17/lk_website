@@ -9,9 +9,14 @@ import {
 import { FormsModule } from '@angular/forms';
 import {
   PRODUCT_TEMPLATES,
+  resolvePlacementFontSize,
   TextLayer,
 } from './customize-item.types';
 import { DEFAULT_FONT_FAMILY, FONT_OPTIONS } from './customize-item.fonts';
+import {
+  getProductTextPlacement,
+  ProductTextPlacement,
+} from './customize-item.placements';
 
 interface DragState {
   mode: 'drag';
@@ -137,15 +142,41 @@ export class CustomizeItem {
     this.canvasSize.set({ width: el.clientWidth, height: el.clientHeight });
   }
 
-  private createTextLayer(content = DEFAULT_TEXT_CONTENT): TextLayer {
+  private getTextLayerPosition(
+    productId = this.selectedProductId(),
+  ): Pick<TextLayer, 'x' | 'y' | 'rotation' | 'fontSize'> {
     const size = this.canvasSize();
+    const placement = getProductTextPlacement(productId);
+
+    return this.resolveTextPlacement(placement, size.width, size.height);
+  }
+
+  private resolveTextPlacement(
+    placement: ProductTextPlacement,
+    canvasWidth: number,
+    canvasHeight: number,
+  ): Pick<TextLayer, 'x' | 'y' | 'rotation' | 'fontSize'> {
+    const width = canvasWidth || 400;
+    const height = canvasHeight || 300;
+
+    return {
+      x: (width * placement.xPercent) / 100,
+      y: (height * placement.yPercent) / 100,
+      rotation: placement.rotation ?? 0,
+      fontSize: resolvePlacementFontSize(placement, width),
+    };
+  }
+
+  private createTextLayer(content = DEFAULT_TEXT_CONTENT): TextLayer {
+    const position = this.getTextLayerPosition();
+
     return {
       id: crypto.randomUUID(),
       content,
-      x: size.width / 2 || 200,
-      y: size.height / 2 || 150,
-      rotation: 0,
-      fontSize: 24,
+      x: position.x,
+      y: position.y,
+      rotation: position.rotation,
+      fontSize: position.fontSize,
       fontFamily: DEFAULT_FONT_FAMILY,
     };
   }

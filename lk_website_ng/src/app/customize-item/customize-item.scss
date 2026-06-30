@@ -341,10 +341,10 @@ input[type='range'] {
 }
 
 .action-button {
-  background: transparent;
-  border: 2px solid $lightgrey;
-  color: $lightgrey;
-  padding: 0.2rem 0.2rem;
+  background: $lk_brown;
+  border: 2px solid $lk_brown;
+  color: white;
+  padding: 0.3rem 0.3rem;
   font-size: 0.8rem;
   border-radius: 2rem;
   cursor: pointer;
@@ -353,8 +353,8 @@ input[type='range'] {
 
   &:hover:not(:disabled) {
     border-color: $lk_brown;  
-    background: $lk_brown;
-    color: white;
+    background: white;
+    color:$lk_brown;
   }
 
   &:disabled {
