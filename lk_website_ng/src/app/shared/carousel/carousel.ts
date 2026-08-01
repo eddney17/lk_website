@@ -1,54 +1,65 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy, inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+
+interface CarouselSlide {
+  src: string;
+  alt: string;
+}
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './carousel.html',
-  styleUrl: './carousel.scss'
+  styleUrl: './carousel.scss',
 })
 export class Carousel implements OnInit, OnDestroy {
-  images = [
-    '/lk_prod_14.jpg',
-    '/lk_prod_2.jpg',
-    '/lk_prod_3.jpg',
-    '/lk_prod_4.jpg',
-    '/lk_prod_5.jpg',
-    '/lk_prod_6.jpg',
-    '/lk_prod_7.jpg',
-    '/lk_prod_8.jpg',
-    '/lk_prod_9.jpg',
-    '/lk_prod_10.jpg',
-    '/lk_prod_11.jpg',
-    '/lk_prod_13.jpg',
-    '/lk_prod_15.jpg',
-    '/lk_prod_16.jpg',
-    '/lk_prod_17.jpg',
-    '/lk_prod_18.jpg',
-    '/lk_prod_20.jpg',
-    '/lk_prod_21.jpg'
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
+  slides: CarouselSlide[] = [
+    { src: '/lk_prod_14.jpg', alt: 'Laser-engraved personalized wooden gift' },
+    { src: '/lk_prod_2.jpg', alt: 'Custom engraved keepsake from LK Engraving Studio' },
+    { src: '/lk_prod_3.jpg', alt: 'Personalized engraved souvenir' },
+    { src: '/lk_prod_4.jpg', alt: 'Handcrafted laser-engraved product' },
+    { src: '/lk_prod_5.jpg', alt: 'Custom engraved wooden item' },
+    { src: '/lk_prod_6.jpg', alt: 'Personalized gift with laser engraving' },
+    { src: '/lk_prod_7.jpg', alt: 'Engraved keepsake for special occasions' },
+    { src: '/lk_prod_8.jpg', alt: 'Custom laser-engraved wood product' },
+    { src: '/lk_prod_9.jpg', alt: 'Personalized engraved giveaway item' },
+    { src: '/lk_prod_10.jpg', alt: 'Laser-engraved gift from LK Studio' },
+    { src: '/lk_prod_11.jpg', alt: 'Custom engraved souvenir product' },
+    { src: '/lk_prod_13.jpg', alt: 'Personalized wooden engraved piece' },
+    { src: '/lk_prod_15.jpg', alt: 'Handcrafted engraved gift item' },
+    { src: '/lk_prod_16.jpg', alt: 'Custom keepsake with laser engraving' },
+    { src: '/lk_prod_17.jpg', alt: 'Personalized engraved product display' },
+    { src: '/lk_prod_18.jpg', alt: 'Laser-engraved wooden gift set' },
+    { src: '/lk_prod_20.jpg', alt: 'Custom engraved Philippines-made gift' },
+    { src: '/lk_prod_21.jpg', alt: 'Personalized engraved souvenir collection' },
   ];
   current = 1; // Start at 1 for seamless effect
-  private intervalId: any;
+  private intervalId: ReturnType<typeof setInterval> | undefined;
   private _noTransition = false;
 
-  get displayImages() {
-    // Duplicate first and last for seamless effect
+  get displaySlides(): CarouselSlide[] {
     return [
-      this.images[this.images.length - 1],
-      ...this.images,
-      this.images[0]
+      this.slides[this.slides.length - 1],
+      ...this.slides,
+      this.slides[0],
     ];
   }
+
   get trackTransform() {
     return `translateX(-${this.current * 100}%)`;
   }
+
   get transition() {
     return this._noTransition ? 'none' : 'transform 0.5s ease';
   }
 
   ngOnInit() {
+    if (!this.isBrowser) {
+      return;
+    }
     this.intervalId = setInterval(() => {
       this.next();
     }, 5000);
@@ -63,7 +74,7 @@ export class Carousel implements OnInit, OnDestroy {
   prev() {
     if (this.current === 0) {
       this._noTransition = true;
-      this.current = this.images.length;
+      this.current = this.slides.length;
       setTimeout(() => {
         this._noTransition = false;
         this.current--;
@@ -72,15 +83,13 @@ export class Carousel implements OnInit, OnDestroy {
       this.intervalId = setInterval(() => {
         this.next();
       }, 5000);
-
-      
     } else {
       this.current--;
     }
   }
 
   next() {
-    if (this.current === this.images.length + 1) {
+    if (this.current === this.slides.length + 1) {
       this._noTransition = true;
       this.current = 1;
       setTimeout(() => {
