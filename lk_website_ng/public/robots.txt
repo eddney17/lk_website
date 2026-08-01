@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /customize-item
+
+Sitemap: https://engravedbylk.com/sitemap.xml
