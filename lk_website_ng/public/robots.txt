@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /customize-item
 
-Sitemap: https://lkstudio.ph/sitemap.xml
+Sitemap: https://engravedbylk.com/sitemap.xml
